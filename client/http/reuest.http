@@ -10,3 +10,10 @@ GET {{url}}/healthz HTTP/1.1
 Content-Type: application/json
 
 
+### Validate a request
+POST {{url}}/validate HTTP/1.1
+Content-Type: application/json
+
+### Mutate a request
+POST {{url}}/mutate HTTP/1.1
+Content-Type: application/json
