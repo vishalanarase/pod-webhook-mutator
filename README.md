@@ -3,6 +3,9 @@
 > This project implements a Kubernetes Mutating Admission Webhook for pod resources. The webhook mutates the pod objects by modifying the environment variables of containers in the pod.
 
 
+![](./docs/images/pwm.jpg)
+
+
 ## Project Structure
 
 `Dockerfile`, `Makefile`, `README.md`: Project build, configuration, and documentation files.
