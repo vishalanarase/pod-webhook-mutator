@@ -4,16 +4,20 @@ x509_extensions = v3_req
 prompt = no
 
 [ req_distinguished_name ]
-C = US
-ST = State
-L = City
-O = Company
+C = India
+ST = Maharashtra
+L = Pune
+O = vishals
 OU = Webhook
-CN = pod-webhook-mutator.default.svc.cluster.local
+CN = pod-webhook-mutator
 
 [ v3_req ]
 subjectAltName = @alt_names
 
 [ alt_names ]
 DNS.1 = pod-webhook-mutator.default.svc.cluster.local
-DNS.2 = localhost
+DNS.2 = pod-webhook-mutator.default.svc.cluster
+DNS.3 = pod-webhook-mutator.default.svc
+DNS.4 = pod-webhook-mutator.default
+DNS.5 = pod-webhook-mutator
+DNS.6 = localhost

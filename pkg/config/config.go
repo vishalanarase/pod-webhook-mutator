@@ -27,17 +27,20 @@ func LoadConfig() *Config {
 // GetTLSConfig returns a TLS configuration for the server.
 func GetTLSConfig() *tls.Config {
 	// Load the Server certificate and key
-	crt, err := os.ReadFile("certs/server.crt")
-	if err != nil {
-		fmt.Println(err)
-	}
-	key, err := os.ReadFile("certs/server.key")
-	if err != nil {
-		fmt.Println(err)
-	}
 
-	// Create a cert pool and add the webhook's CA cert to it
-	caCert, err := os.ReadFile("certs/ca.crt")
+	certPath := "certs/server.crt"
+	keyPath := "certs/server.key"
+	caCertPath := "certs/ca.crt"
+
+	crt, err := os.ReadFile(certPath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	key, err := os.ReadFile(keyPath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	caCert, err := os.ReadFile(caCertPath)
 	if err != nil {
 		fmt.Println(err)
 	}

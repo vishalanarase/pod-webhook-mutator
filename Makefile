@@ -13,5 +13,8 @@ docker-build:
 docker-push:
 	docker push vishalanarase/pod-webhook-mutator:latest
 
-kustomize:
+deploy:
 	kustomize build manifests/ | kubectl apply -f -
+
+undeploy:
+	kustomize build manifests/ | kubectl delete -f -

@@ -15,14 +15,24 @@ openssl req -new -x509 -days 365 -key certs/ca.key -out certs/ca.crt -subj "/CN=
 
 Server certifcates for the pod-webhook-mutator application service
 
-
 ```bash
-export SERVICE_NAME=pod-webhook-mutator.default.svc.cluster.local
+export SERVICE_NAME=pod-webhook-mutator
 openssl genrsa -out certs/server.key 2048
 openssl req -new -key certs/server.key -out certs/server.csr -subj "/CN=$SERVICE_NAME"
 openssl x509 -req -in certs/server.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/server.crt -days 365 -extfile certs/openssl.cnf -extensions v3_req
 ```
 
+Check the certificate
+
+```bash
+openssl x509 -in certs/server.crt -text -noout
+```
+It should contain the following subject alternative names
+
+```yaml
+X509v3 Subject Alternative Name:
+                DNS:pod-webhook-mutator.default.svc.cluster.local, DNS:pod-webhook-mutator.default.svc.cluster, DNS:pod-webhook-mutator.default.svc, DNS:pod-webhook-mutator.default, DNS:pod-webhook-mutator, DNS:localhost
+```
 
 ## Client Certificates
 

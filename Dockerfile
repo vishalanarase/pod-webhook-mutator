@@ -8,8 +8,9 @@ COPY . .
 RUN go build -o /app/pod-webhook-mutator ./cmd
 
 FROM alpine:latest
-WORKDIR /root/
+WORKDIR /
 COPY --from=builder /app/pod-webhook-mutator .
-COPY certs /root/certs
+
+#COPY certs /root/certs
 EXPOSE 443
 CMD ["./pod-webhook-mutator"]
