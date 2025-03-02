@@ -1,0 +1,12 @@
+@url=https://localhost:443
+@clientCert(certPath="../../certs/client.crt", keyPath="../../certs/client.key", caPath="../../certs/ca.crt")
+
+### Check the status of the readyz endpoint
+GET {{url}}/readyz HTTP/1.1
+Content-Type: application/json
+
+### Check the status of the healthz endpoint
+GET {{url}}/healthz HTTP/1.1
+Content-Type: application/json
+
+
