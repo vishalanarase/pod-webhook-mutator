@@ -1,19 +1,12 @@
 package webhook
 
-import (
-	"net/http"
-)
+import "github.com/gorilla/mux"
 
-// Impelement the http.HandleFunc("/healthz", healthz)
-//http.HandleFunc("/readyz", readyz)
+// GetRouter returns a new router with the handlers for the healthz and readyz endpoints.
+func GetRouter() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/healthz", Healthz)
+	r.HandleFunc("/readyz", Readyz)
 
-func Healthz(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("okz"))
-}
-
-func Readyz(w http.ResponseWriter, r *http.Request) {
-
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("okz"))
+	return r
 }

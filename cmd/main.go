@@ -4,20 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 	"github.com/vishalanarase/pod-webhook-mutator/pkg/config"
 	"github.com/vishalanarase/pod-webhook-mutator/pkg/webhook"
 )
-
-// GetRouter returns a new router with the handlers for the healthz and readyz endpoints.
-func GetRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/healthz", webhook.Healthz)
-	r.HandleFunc("/readyz", webhook.Readyz)
-
-	return r
-}
 
 func main() {
 	// Load the configuration
@@ -28,7 +18,7 @@ func main() {
 	server := &http.Server{
 		Addr:      config.ServerAddress,
 		TLSConfig: config.TLSConfig,
-		Handler:   GetRouter(),
+		Handler:   webhook.GetRouter(),
 	}
 
 	// Start the server
