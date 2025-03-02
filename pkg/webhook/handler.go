@@ -8,7 +8,6 @@ func GetRouter() *mux.Router {
 
 	r.HandleFunc("/healthz", Healthz).Methods("GET")
 	r.HandleFunc("/readyz", Readyz).Methods("GET")
-	r.HandleFunc("/validate", Validate).Methods("POST")
 	r.HandleFunc("/mutate", Mutate).Methods("POST")
 
 	return r
