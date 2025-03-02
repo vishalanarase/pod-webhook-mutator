@@ -3,7 +3,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: pod-mutating-webhook
 webhooks:
-  - name: pod-webhook-mutator.kb.io
+  - name: pod-webhook-mutator.kuberntes.io
     clientConfig:
       service:
         name: pod-webhook-mutator
