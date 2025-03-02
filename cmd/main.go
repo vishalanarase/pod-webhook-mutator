@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/sirupsen/logrus"
@@ -11,8 +10,15 @@ import (
 
 func main() {
 	// Load the configuration
-	config := config.LoadConfig()
-	fmt.Printf("Server address: %s\n", config.ServerAddress)
+	logrus.Info("Loading configuration")
+	config, err := config.LoadConfig() // Assuming LoadConfig returns (config, error)
+	if err != nil {
+		logrus.WithError(err).Fatal("Failed to load configuration")
+	}
+
+	logrus.Info("Configuration loaded successfully")
+
+	logrus.Infof("Server address: %s", config.ServerAddress)
 
 	// Server configuration
 	server := &http.Server{
@@ -22,11 +28,12 @@ func main() {
 	}
 
 	// Start the server
-	fmt.Println("Starting server on :443")
-	err := server.ListenAndServeTLS("certs/server.crt", "certs/server.key")
+	logrus.Info("Starting server on :443")
+	err = server.ListenAndServeTLS("certs/server.crt", "certs/server.key")
 	if err != nil {
+		logrus.WithError(err).Error("Failed to start server")
 		logrus.Fatal(err)
 	}
 
-	fmt.Println("Server started on :443")
+	logrus.Info("Server started on :443")
 }
