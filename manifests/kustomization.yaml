@@ -1,0 +1,5 @@
+resources:
+  - pod-webhook-mutator-secret.yaml
+  - pod-webhook-mutator-deployment.yaml
+  - pod-webhook-mutator-service.yaml
+  - pod-mutating-webhook-mutatingwebhookconfiguration.yaml

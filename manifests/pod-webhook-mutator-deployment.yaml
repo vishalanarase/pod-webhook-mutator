@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-webhook-mutator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-webhook-mutator
+  template:
+    metadata:
+      labels:
+        app: pod-webhook-mutator
+    spec:
+      priorityClassName: system-cluster-critical
+      containers:
+        - name: pod-webhook-mutator
+          image: vishalanarase/pod-webhook-mutator:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: webhook-tls
+              mountPath: certs
+              readOnly: true
+      volumes:
+        - name: webhook-tls
+          secret:
+            secretName: pod-webhook-mutator

@@ -1,0 +1,23 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: pod-mutating-webhook
+webhooks:
+  - name: pod-webhook-mutator.default.svc.cluster.local
+    clientConfig:
+      service:
+        name: pod-webhook-mutator
+        namespace: default
+        path: /mutate
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUROVENDQWgyZ0F3SUJBZ0lVRVRWK2JDemJUMWkvNytMSjVoZU0yQVhCS0Iwd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0tqRW9NQ1lHQTFVRUF3d2ZTM1ZpWlhKdVpYUmxjeUJCWkcxcGMzTnBiMjRnUTI5dWRISnZiR3hsY2pBZQpGdzB5TlRBek1ESXdOVFExTVRkYUZ3MHlOakF6TURJd05UUTFNVGRhTUNveEtEQW1CZ05WQkFNTUgwdDFZbVZ5CmJtVjBaWE1nUVdSdGFYTnphVzl1SUVOdmJuUnliMnhzWlhJd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFDZkFQcThEdms1dmFZeU5wbERzU2g2ditOeU0yL2dlQ05TQ0VXZWhra0Z6Vy9FSVNDRwp4Ti9SNzlsc0pNWWo2MC8rTDc3QW11N3gvNDlPVjBNalRSWjQ1Uk9hMkx1UmNiVFVROTlMV05FRXhSWHFIRnBrCklRSXlnYjFDR09tcWNJcjA3dU8zcXZRNlhwbXAyRVRHNTZYLzVmdnpiNmxLeVBKM25hZGpqWW4zRGhkdGg3SzUKOWtiWnNUOCtCa0VOY1NKa3ZTUy9xUEs3Ykg4Y3NTWittS0czZjUzckZQc3hESWx2M25BVGpkcUtVWHlSNWx6SgpFWEtISXJSK0k1RG02b0pzelVnMzRoRlBadjc2RTRGV0U2NnlWNS8xaDViTUh3TFNJRm5odzE0eVhiQURHYTZICjEzNlVwSUdpYlNYUVhOY0RLMUtsc1JjT29RbUtkWmNDZjdLOUFnTUJBQUdqVXpCUk1CMEdBMVVkRGdRV0JCUW0KZVVDTWZMT20xcDUrOVEzTkxLa3EwMnYzcXpBZkJnTlZIU01FR0RBV2dCUW1lVUNNZkxPbTFwNSs5UTNOTEtrcQowMnYzcXpBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFBSWNYMXhqQzNrCnZ5NU0zNHliY0lHcmtORWUzOFExOGR2anUyL01ydWExcjVON1VkeFJTZ25helpBSXhwNC9RTFFXaUZlNVBOUlIKa2pvVWgzeUoxNHRqUEd4dGliTHJzUnM2TG95am1vU2VzckFnYXhSV1F3SStxdEIvTWpidkV1eXhzNEF2WG00egpaelBmc0dyNnlmMkJrbGg3VjVEbjN3NWhoMnlRTjQ1MmFOZTNhQlNHS016M2dLUlI4TXltbDI2NVd0amJkSmI1CkFiWFZoUkcxdUs5T3BLL1RmcGpVVEtvSEtwYmNzOW9lQ3U3VTJ6S3BYYUZHbDllditxQWE4cmxZdVBYMkdKekYKWGlmaElzSDZaQVJZalhVRDU3bkRRTEE3NEJ4Vm5lNXRIYVdzb3Y0YjRsa3BOak1ZbElqQVZ5SXVvQS9yaHFTWApKeE1PUlM2TlExTFYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    rules:
+      - operations: ["CREATE", "UPDATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    timeoutSeconds: 30
+    objectSelector: # Very important to restrict the webhook to mutate the only pods with the label
+      matchLabels:
+        pod-mutating-webhook-enabled: "true"
