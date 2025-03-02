@@ -6,11 +6,17 @@
 ## Project Structure
 
 `Dockerfile`, `Makefile`, `README.md`: Project build, configuration, and documentation files.
+
 `certs`: SSL/TLS certificate-related files for secure communication.
+
 `client`: Client-side HTTP requests for testing or interacting with the webhook.
+
 `cmd`: The main application entry point (e.g., starting the server).
+
 `docs`: Documentation for certificates and Docker usage.
+
 `manifests`: Kubernetes resources for deploying and managing the webhook in a Kubernetes cluster.
+
 `pkg`: Core application logic, including configuration, webhook handlers, and mutation logic.
 
 ## Getting Started
@@ -47,11 +53,11 @@ kind create cluster --config kind.yaml
 
 ### Certificate Generation
 
-Follow the instructions in `docs/certs.md` to generate the necessary certificates for the webhook.
+Follow the [instructions](docs/certs.md) to generate the necessary certificates for the webhook.
 
 ### Docker Build and Push
 
-Follow the instructions in `docs/docker.md` to build and push the Docker image to a container registry.
+Follow the [instructions](docs/docker.md) to build and push the Docker image to a container registry.
 
 ### Deploying the Webhook
 
